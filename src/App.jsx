@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from './components/AdminLayout';
 import AdminLogin from './pages/AdminLogin';
 import Dashboard from './pages/Dashboard';
@@ -7,18 +7,22 @@ import Customers from './pages/Customers';
 import Loans from './pages/Loans';
 import Savings from './pages/Savings';
 import DailyCollection from './pages/DailyCollection';
-import Settings from './pages/Settings';
 import Reports from './pages/Reports';
 import PaymentVerify from './pages/PaymentVerify';
 import Notifications from './pages/Notifications';
+import Settings from './pages/Settings';
+
+// Customer Pages
+import CustomerDashboard from './pages/CustomerDashboard';
 
 function App() {
   return (
     <Routes>
-      {/* Public Route */}
+      {/* Login Routes */}
       <Route path="/login" element={<AdminLogin />} />
+      <Route path="/customer-login" element={<AdminLogin />} />
       
-      {/* Protected Admin Routes */}
+      {/* Admin Routes */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="customers" element={<Customers />} />
@@ -30,9 +34,13 @@ function App() {
         <Route path="notifications" element={<Notifications />} />
         <Route path="settings" element={<Settings />} />
       </Route>
-      
-      {/* Default redirect */}
-      <Route path="*" element={<AdminLogin />} />
+
+      {/* Customer Routes */}
+      <Route path="/customer" element={<CustomerDashboard />} />
+
+      {/* Default Redirect */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }

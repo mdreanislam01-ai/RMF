@@ -1,9 +1,15 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
 
 const AdminLayout = () => {
   const { language, toggleLanguage, t } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   return (
     <div className="flex h-screen bg-gray-100 font-sans">
@@ -29,7 +35,6 @@ const AdminLayout = () => {
         </nav>
 
         <div className="p-4 border-t flex flex-col space-y-3">
-          {/* ভাষা পরিবর্তন করার বাটন */}
           <button 
             onClick={toggleLanguage} 
             className="w-full py-2 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition"
@@ -37,7 +42,10 @@ const AdminLayout = () => {
             {language === 'bn' ? 'Switch to English' : 'বাংলায় পরিবর্তন করুন'}
           </button>
           
-          <button className="text-red-500 w-full p-2 font-medium">
+          <button 
+            onClick={handleLogout}
+            className="text-red-500 w-full p-2 font-medium hover:bg-red-50 rounded-lg"
+          >
             {t.logout}
           </button>
         </div>
