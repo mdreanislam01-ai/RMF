@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js 20
@@ -26,6 +26,8 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: 'platforms;android-34 build-tools;34.0.0 platform-tools'
 
       - name: Install dependencies
         run: npm install
@@ -47,24 +49,26 @@ jobs:
           }
           EOF
 
-      - name: Initialize & Add Android
+      - name: Initialize Capacitor
+        run: npx cap init "RMF MicroFinance" com.rmf.microfinance --web-dir dist || true
+
+      - name: Add Android platform
         run: |
-          npx cap init "RMF MicroFinance" com.rmf.microfinance --web-dir dist || true
           if [ ! -d "android" ]; then
             npx cap add android
           fi
 
-      - name: Update Capacitor (Critical Fix)
-        run: npx cap update android
-
-      - name: Sync Capacitor
+      - name: Update & Sync Capacitor
         run: |
+          npx cap update android
           npx cap copy android
           npx cap sync android
 
-      - name: Make gradlew executable
+      - name: Clean previous builds
         working-directory: android
-        run: chmod +x gradlew
+        run: |
+          chmod +x gradlew
+          ./gradlew clean --no-daemon
 
       - name: Build Debug APK
         working-directory: android
