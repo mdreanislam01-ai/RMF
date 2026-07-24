@@ -13,10 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 18 (Stable)
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Setup Java 17
         uses: actions/setup-java@v4
@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build React App
-        run: npm run build
+      - name: Build React App (with verbose)
+        run: npm run build --verbose
 
       - name: Install Capacitor
         run: npm install @capacitor/core @capacitor/android @capacitor/cli --save-dev
@@ -61,11 +61,11 @@ jobs:
           npx cap copy android
           npx cap sync android
 
-      - name: Build Debug APK
+      - name: Build Debug APK (with stacktrace)
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
