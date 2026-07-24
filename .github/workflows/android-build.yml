@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js 20
@@ -47,18 +47,18 @@ jobs:
           }
           EOF
 
-      - name: Initialize Capacitor
-        run: npx cap init "RMF MicroFinance" com.rmf.microfinance --web-dir dist || true
-
-      - name: Add Android platform
+      - name: Initialize & Add Android
         run: |
+          npx cap init "RMF MicroFinance" com.rmf.microfinance --web-dir dist || true
           if [ ! -d "android" ]; then
             npx cap add android
           fi
 
-      - name: Update & Sync Capacitor
+      - name: Update Capacitor (Critical Fix)
+        run: npx cap update android
+
+      - name: Sync Capacitor
         run: |
-          npx cap update android
           npx cap copy android
           npx cap sync android
 
@@ -68,7 +68,7 @@ jobs:
 
       - name: Build Debug APK
         working-directory: android
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
+        run: ./gradlew assembleDebug --no-daemon --stacktrace --info
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
