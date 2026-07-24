@@ -22,6 +22,9 @@ const AdminLayout = () => {
           <Link to="/admin/loans" className="block p-3 text-gray-600 hover:bg-gray-50 rounded-lg">{t.loans}</Link>
           <Link to="/admin/savings" className="block p-3 text-gray-600 hover:bg-gray-50 rounded-lg">{t.savings}</Link>
           <Link to="/admin/daily-collection" className="block p-3 text-gray-600 hover:bg-gray-50 rounded-lg">{t.dailyCollection}</Link>
+          <Link to="/admin/reports" className="block p-3 text-gray-600 hover:bg-gray-50 rounded-lg">{t.reports}</Link>
+          <Link to="/admin/payment-verify" className="block p-3 text-gray-600 hover:bg-gray-50 rounded-lg">পেমেন্ট যাচাই</Link>
+          <Link to="/admin/notifications" className="block p-3 text-gray-600 hover:bg-gray-50 rounded-lg">নোটিফিকেশন</Link>
           <Link to="/admin/settings" className="block p-3 text-gray-600 hover:bg-gray-50 rounded-lg">{t.settings}</Link>
         </nav>
 

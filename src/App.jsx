@@ -8,6 +8,9 @@ import Loans from './pages/Loans';
 import Savings from './pages/Savings';
 import DailyCollection from './pages/DailyCollection';
 import Settings from './pages/Settings';
+import Reports from './pages/Reports';
+import PaymentVerify from './pages/PaymentVerify';
+import Notifications from './pages/Notifications';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
         <Route path="loans" element={<Loans />} />
         <Route path="savings" element={<Savings />} />
         <Route path="daily-collection" element={<DailyCollection />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="payment-verify" element={<PaymentVerify />} />
+        <Route path="notifications" element={<Notifications />} />
         <Route path="settings" element={<Settings />} />
       </Route>
       
