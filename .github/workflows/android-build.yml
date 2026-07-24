@@ -56,8 +56,9 @@ jobs:
             npx cap add android
           fi
 
-      - name: Sync Capacitor (Important)
+      - name: Update & Sync Capacitor
         run: |
+          npx cap update android
           npx cap copy android
           npx cap sync android
 
