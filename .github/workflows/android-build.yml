@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js 20
@@ -61,7 +61,7 @@ jobs:
           npx cap copy android
           npx cap sync android
 
-      - name: Build Android APK
+      - name: Build Debug APK
         working-directory: android
         run: |
           chmod +x gradlew
