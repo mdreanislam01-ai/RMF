@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 18 (stable for Capacitor)
+      - name: Setup Node.js 18 (Stable)
         uses: actions/setup-node@v4
         with:
           node-version: '18'
@@ -56,7 +56,7 @@ jobs:
             npx cap add android
           fi
 
-      - name: Sync web assets to Android
+      - name: Sync web assets
         run: |
           npx cap copy android
           npx cap sync android
@@ -65,7 +65,7 @@ jobs:
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
