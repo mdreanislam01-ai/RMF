@@ -1,0 +1,7 @@
+{
+  "appId": "com.rmf.microfinance",
+  "appName": "RMF MicroFinance",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "plugins": {}
+}
